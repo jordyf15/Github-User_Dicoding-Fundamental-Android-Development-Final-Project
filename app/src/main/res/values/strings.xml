@@ -3,6 +3,11 @@
 
     <string name="user_name">Jordy Ferdian</string>
     <string name="user_username">Jordyf15</string>
+    <string name="user_company">Google</string>
+    <string name="user_location">Tokyo, Japan</string>
+    <string name="user_repository">9999</string>
+    <string name="user_follower">999</string>
+    <string name="user_following">69</string>
 
     <string-array name="data_username">
         <item>JakeWharton</item>
