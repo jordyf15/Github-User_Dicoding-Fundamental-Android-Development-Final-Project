@@ -19,8 +19,10 @@
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextContent"
+        android:layout_marginTop="25dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img_avatar"
@@ -28,56 +30,80 @@
 
     <TextView
         android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextContent"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:text="@string/user_username" />
 
-    <TextView
-        android:id="@+id/tv_company"
+
+    <LinearLayout
+        android:id="@+id/people_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_username"
+        app:layout_constraintTop_toBottomOf="@id/tv_username">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/ic_people_description"
+            android:src="@drawable/ic_people" />
+
+        <TextView
+            android:id="@+id/tv_follower"
+            style="@style/TextContent"
+            tools:text="@string/user_follower" />
+
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="5dp"
+            android:contentDescription="@string/ic_dot_description"
+            android:src="@drawable/ic_dot" />
+
+        <TextView
+            android:id="@+id/tv_following"
+            style="@style/TextContent"
+            android:layout_marginStart="5dp"
+            tools:text="@string/user_following" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_repository"
+        style="@style/TextContent"
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/ic_repository"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/people_group"
+        tools:text="@string/user_repository" />
+
+    <TextView
+        android:id="@+id/tv_company"
+        style="@style/TextContent"
+        android:drawablePadding="10dp"
+        app:drawableStartCompat="@drawable/ic_company"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_repository"
         tools:text="@string/user_company" />
+
 
     <TextView
         android:id="@+id/tv_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextContent"
+        android:drawablePadding="5dp"
+        app:drawableStartCompat="@drawable/ic_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_company"
         tools:text="@string/user_location" />
 
-    <TextView
-        android:id="@+id/tv_repository"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_location"
-        tools:text="@string/user_repository" />
-
-    <TextView
-        android:id="@+id/tv_follower"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_repository"
-        tools:text="@string/user_follower" />
-
-    <TextView
-        android:id="@+id/tv_following"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_follower"
-        tools:text="@string/user_following" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

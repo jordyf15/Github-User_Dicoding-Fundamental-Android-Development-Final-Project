@@ -5,9 +5,19 @@
     <string name="user_username">Jordyf15</string>
     <string name="user_company">Google</string>
     <string name="user_location">Tokyo, Japan</string>
-    <string name="user_repository">9999</string>
-    <string name="user_follower">999</string>
-    <string name="user_following">69</string>
+    <string name="user_repository">Repositories 154</string>
+    <string name="user_follower">123 Follower</string>
+    <string name="user_following">69 Following</string>
+
+    <string name="ic_company_description">Company Icon</string>
+    <string name="ic_people_description">People Icon</string>
+    <string name="ic_repository_description">Repository Icon</string>
+    <string name="ic_dot_description">Dot Icon</string>
+    <string name="ic_location_description">Location Icon</string>
+
+    <string name="detail_repository">Repositories %1$d</string>
+    <string name="detail_follower">%1$d Follower</string>
+    <string name="detail_following">%1$d Following</string>
 
     <string-array name="data_username">
         <item>JakeWharton</item>
@@ -50,14 +60,14 @@
 
     <string-array name="data_company">
         <item>Google, Inc.</item>
-        <item>/@MindOrksOpenSource</item>
+        <item>MindOrksOpenSource</item>
         <item>Google</item>
-        <item>/@google working on @android</item>
+        <item>google working on android</item>
         <item>Working Group Two</item>
         <item>AndroidHive | Droid5</item>
-        <item>/@gojek-engineering</item>
-        <item>/@KotlinID</item>
-        <item>/@JVMDeveloperID @KotlinID @IDDevOps</item>
+        <item>gojek-engineering</item>
+        <item>KotlinID</item>
+        <item>JVMDeveloperID KotlinID IDDevOps</item>
         <item>Nusantara Beta Studio</item>
     </string-array>
 

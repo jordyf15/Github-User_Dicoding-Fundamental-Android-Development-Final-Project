@@ -47,24 +47,21 @@
         <TextView
             android:id="@+id/tv_item_username"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:maxLines="5"
+            android:layout_height="wrap_content"
             card_view:layout_constraintBottom_toBottomOf="@+id/img_item_avatar"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_item_name"
             card_view:layout_constraintStart_toStartOf="@+id/tv_item_name"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_item_name"
-            card_view:layout_constraintVertical_bias="0.0"
             tools:text="@string/user_username" />
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_arrow_right"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:src="@drawable/ic_detail"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_detail_light" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
