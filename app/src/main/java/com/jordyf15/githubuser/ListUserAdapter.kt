@@ -3,9 +3,10 @@ package com.jordyf15.githubuser
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jordyf15.githubuser.databinding.ItemRowUserBinding
 
-class ListUserAdapter(private val listUser: ArrayList<User>) :
+class ListUserAdapter(private val listUser: List<User>) :
     RecyclerView.Adapter<ListUserAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -24,18 +25,21 @@ class ListUserAdapter(private val listUser: ArrayList<User>) :
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val (username, name, avatar) = listUser[position]
-        holder.binding.imgItemAvatar.setImageResource(avatar)
-        holder.binding.tvItemName.text = name
-        holder.binding.tvItemUsername.text = username
+        val (login, avatarUrl) = listUser[position]
+        Glide.with(holder.itemView.context)
+            .load(avatarUrl)
+            .into(holder.binding.imgItemAvatar)
+        holder.binding.tvItemName.text = login
         holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(listUser[holder.adapterPosition])
+            if (login != null) {
+                onItemClickCallback.onItemClicked(login)
+            }
         }
     }
 
     override fun getItemCount(): Int = listUser.size
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: User)
+        fun onItemClicked(username: String)
     }
 }

@@ -3,12 +3,17 @@ package com.jordyf15.githubuser
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jordyf15.githubuser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val list = ArrayList<User>()
+    private val mainViewModel by viewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,52 +22,49 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvUsers.setHasFixedSize(true)
 
-        list.addAll(listUsers)
-        showRecyclerList()
-    }
-
-    private val listUsers: ArrayList<User>
-        get() {
-            val dataName = resources.getStringArray(R.array.data_name)
-            val dataAvatar = resources.obtainTypedArray(R.array.data_avatar)
-            val dataUsername = resources.getStringArray(R.array.data_username)
-            val dataCompany = resources.getStringArray(R.array.data_company)
-            val dataLocation = resources.getStringArray(R.array.data_location)
-            val dataRepository = resources.getIntArray(R.array.data_repository)
-            val dataFollower = resources.getIntArray(R.array.data_follower)
-            val dataFollowing = resources.getIntArray(R.array.data_following)
-            val listUser = ArrayList<User>()
-            for (i in dataName.indices) {
-                val user = User(
-                    dataUsername[i],
-                    dataName[i],
-                    dataAvatar.getResourceId(i, -1),
-                    dataCompany[i],
-                    dataLocation[i],
-                    dataRepository[i],
-                    dataFollower[i],
-                    dataFollowing[i]
-                )
-                listUser.add(user)
-            }
-            return listUser
+        mainViewModel.listUsers.observe(this) {
+            showRecyclerList(it)
         }
 
-    private fun showUserDetail(user: User) {
+        mainViewModel.errorMsg.observe(this) {
+            Toast.makeText(this, "An error has occurred", Toast.LENGTH_SHORT).show()
+        }
+
+        mainViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+        binding.svUsers.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                mainViewModel.searchUsers(query)
+                binding.svUsers.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?) = false
+        })
+
+    }
+
+    private fun showUserDetail(username: String) {
         val detailIntent = Intent(this@MainActivity, DetailActivity::class.java)
-        detailIntent.putExtra(DetailActivity.EXTRA_USER, user)
+        detailIntent.putExtra(DetailActivity.EXTRA_USERNAME, username)
         startActivity(detailIntent)
     }
 
-    private fun showRecyclerList() {
+    private fun showRecyclerList(list: List<User>) {
         binding.rvUsers.layoutManager = LinearLayoutManager(this)
         val listUserAdapter = ListUserAdapter(list)
         binding.rvUsers.adapter = listUserAdapter
 
         listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: User) {
-                showUserDetail(data)
+            override fun onItemClicked(username: String) {
+                showUserDetail(username)
             }
         })
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

@@ -6,104 +6,111 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_avatar"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_marginTop="80dp"
-        app:flow_horizontalBias="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/upper_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:paddingBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@id/lower_detail"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_name"
-        style="@style/TextContent"
-        android:layout_marginTop="25dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_avatar"
-        tools:text="@string/user_name" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_username"
-        style="@style/TextContent"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"
-        tools:text="@string/user_username" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                tools:src="@tools:sample/avatars" />
 
+            <TextView
+                android:id="@+id/tv_username"
+                style="@style/TextContent"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="@string/user_username" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/TextContent"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="18sp"
+                android:visibility="gone"
+                tools:text="@string/user_name"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_repository"
+                style="@style/TextContent"
+                android:drawablePadding="10dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_repository"
+                tools:text="@string/user_repository"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_company"
+                style="@style/TextContent"
+                android:drawablePadding="10dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_company"
+                tools:text="@string/user_company"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                style="@style/TextContent"
+                android:drawablePadding="5dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:visibility="gone"
+                app:drawableStartCompat="@drawable/ic_location"
+                tools:text="@string/user_location"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Loading"
+            android:layout_gravity="center"
+            android:indeterminateTint="?attr/colorOnPrimary"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/people_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_username">
+        android:id="@+id/lower_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upper_detail">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="10dp"
-            android:contentDescription="@string/ic_people_description"
-            android:src="@drawable/ic_people" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:tabIndicatorColor="?attr/colorOnPrimary"
+            app:tabIndicatorFullWidth="true"
+            app:tabIndicatorHeight="5dp"
+            app:tabTextColor="?attr/colorOnPrimary" />
 
-        <TextView
-            android:id="@+id/tv_follower"
-            style="@style/TextContent"
-            tools:text="@string/user_follower" />
-
-        <ImageView
-            android:layout_width="5dp"
-            android:layout_height="5dp"
-            android:layout_marginStart="5dp"
-            android:contentDescription="@string/ic_dot_description"
-            android:src="@drawable/ic_dot" />
-
-        <TextView
-            android:id="@+id/tv_following"
-            style="@style/TextContent"
-            android:layout_marginStart="5dp"
-            tools:text="@string/user_following" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_repository"
-        style="@style/TextContent"
-        android:drawablePadding="10dp"
-        app:drawableStartCompat="@drawable/ic_repository"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/people_group"
-        tools:text="@string/user_repository" />
-
-    <TextView
-        android:id="@+id/tv_company"
-        style="@style/TextContent"
-        android:drawablePadding="10dp"
-        app:drawableStartCompat="@drawable/ic_company"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_repository"
-        tools:text="@string/user_company" />
-
-
-    <TextView
-        android:id="@+id/tv_location"
-        style="@style/TextContent"
-        android:drawablePadding="5dp"
-        app:drawableStartCompat="@drawable/ic_location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_company"
-        tools:text="@string/user_location" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

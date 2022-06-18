@@ -30,7 +30,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tv_item_name"
+            android:id="@+id/tv_item_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -43,16 +43,6 @@
             card_view:layout_constraintStart_toEndOf="@id/img_item_avatar"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="@string/user_name" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_arrow_right"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/ic_detail"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
