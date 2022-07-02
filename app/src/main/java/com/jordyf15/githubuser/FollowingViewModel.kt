@@ -18,10 +18,6 @@ class FollowingViewModel : ViewModel() {
     private val _errorMsg = MutableLiveData<String>()
     val errorMsg: LiveData<String> = _errorMsg
 
-    companion object {
-        private const val TAG = "FollowingViewModel"
-    }
-
     fun getFollowings(username: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getUserFollowing(username)
@@ -45,5 +41,9 @@ class FollowingViewModel : ViewModel() {
                 _errorMsg.value = t.message.toString()
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "FollowingViewModel"
     }
 }

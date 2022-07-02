@@ -11,10 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jordyf15.githubuser.databinding.FragmentFollowerBinding
 
 class FollowerFragment : Fragment() {
-    companion object {
-        const val FOLLOWER_USERNAME = "follower_fragment_username"
-    }
-
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding
     private val followerViewModel: FollowerViewModel by activityViewModels()
@@ -50,5 +46,9 @@ class FollowerFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding?.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val FOLLOWER_USERNAME = "follower_fragment_username"
     }
 }

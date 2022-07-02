@@ -22,10 +22,6 @@ class MainViewModel : ViewModel() {
         searchUsers("john")
     }
 
-    companion object {
-        private const val TAG = "MainViewModel"
-    }
-
     fun searchUsers(username: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().searchUsers(username)
@@ -51,4 +47,7 @@ class MainViewModel : ViewModel() {
         })
     }
 
+    companion object {
+        private const val TAG = "MainViewModel"
+    }
 }

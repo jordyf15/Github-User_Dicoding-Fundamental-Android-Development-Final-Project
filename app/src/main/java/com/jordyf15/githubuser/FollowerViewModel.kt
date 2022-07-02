@@ -9,11 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowerViewModel : ViewModel() {
-
-    companion object {
-        private const val TAG = "FollowerViewModel"
-    }
-
     private val _listFollower = MutableLiveData<List<User>>()
     val listFollower: LiveData<List<User>> = _listFollower
 
@@ -44,5 +39,9 @@ class FollowerViewModel : ViewModel() {
                 Log.e(TAG, "OnFailure: ${t.message.toString()}")
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "FollowerViewModel"
     }
 }

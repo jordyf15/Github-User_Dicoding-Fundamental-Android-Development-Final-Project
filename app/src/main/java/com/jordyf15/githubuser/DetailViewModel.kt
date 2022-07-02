@@ -18,10 +18,6 @@ class DetailViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    companion object {
-        private const val TAG = "DetailViewModel"
-    }
-
     fun getUserDetail(username: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getDetailUser(username)
@@ -45,5 +41,9 @@ class DetailViewModel : ViewModel() {
                 _errorMsg.value = t.message.toString()
             }
         })
+    }
+
+    companion object {
+        private const val TAG = "DetailViewModel"
     }
 }

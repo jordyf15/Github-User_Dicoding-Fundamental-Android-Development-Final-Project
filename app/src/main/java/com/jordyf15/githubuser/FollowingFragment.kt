@@ -11,10 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jordyf15.githubuser.databinding.FragmentFollowingBinding
 
 class FollowingFragment : Fragment() {
-    companion object {
-        const val FOLLOWING_USERNAME = "following_fragment_username"
-    }
-
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding
     private val followingViewModel: FollowingViewModel by activityViewModels()
@@ -52,4 +48,7 @@ class FollowingFragment : Fragment() {
         binding?.rvFollowings?.adapter = listFollowsAdapter
     }
 
+    companion object {
+        const val FOLLOWING_USERNAME = "following_fragment_username"
+    }
 }
