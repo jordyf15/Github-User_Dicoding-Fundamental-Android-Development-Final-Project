@@ -14,3 +14,4 @@
 .cxx
 local.properties
 env.properties
+/env.properties
