@@ -4,10 +4,15 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+def envPropertiesFile = rootProject.file("env.properties")
+def envProperties = new Properties()
+envProperties.load(new FileInputStream(envPropertiesFile))
+
 android {
     compileSdk 32
 
     defaultConfig {
+        buildConfigField("String", "GITHUB_TOKEN", envProperties["GITHUB_TOKEN"])
         applicationId "com.jordyf15.githubuser"
         minSdk 21
         targetSdk 32

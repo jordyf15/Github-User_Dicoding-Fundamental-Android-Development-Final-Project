@@ -1,4 +1,4 @@
-package com.jordyf15.githubuser
+package com.jordyf15.githubuser.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jordyf15.githubuser.api.User
 import com.jordyf15.githubuser.databinding.ActivityMainBinding
+import com.jordyf15.githubuser.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

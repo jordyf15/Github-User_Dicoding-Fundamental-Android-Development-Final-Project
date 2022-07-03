@@ -1,9 +1,10 @@
-package com.jordyf15.githubuser
+package com.jordyf15.githubuser.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jordyf15.githubuser.api.User
 import com.jordyf15.githubuser.databinding.ItemRowFollowBinding
 
 class ListFollowsAdapter(private val listUser: List<User>) :

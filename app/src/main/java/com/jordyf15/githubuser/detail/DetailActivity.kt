@@ -1,4 +1,4 @@
-package com.jordyf15.githubuser
+package com.jordyf15.githubuser.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import com.jordyf15.githubuser.R
 import com.jordyf15.githubuser.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
@@ -49,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
 
         }
         detailViewModel.errorMsg.observe(this) {
-            Toast.makeText(this, "An error has occurred", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, resources.getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
         }
         detailViewModel.isLoading.observe(this) {
             showLoading(it)

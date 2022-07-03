@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.jordyf15.githubuser.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
-    private val splashDuration: Long = 2000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -17,5 +17,9 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, splashDuration)
+    }
+
+    companion object {
+        private const val splashDuration: Long = 2000
     }
 }

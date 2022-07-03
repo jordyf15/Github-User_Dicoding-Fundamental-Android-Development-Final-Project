@@ -1,4 +1,4 @@
-package com.jordyf15.githubuser
+package com.jordyf15.githubuser.api
 
 import com.google.gson.annotations.SerializedName
 
