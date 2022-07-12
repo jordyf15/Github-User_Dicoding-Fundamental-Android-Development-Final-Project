@@ -1,4 +1,4 @@
-package com.jordyf15.githubuser.api
+package com.jordyf15.githubuser.data.remote.retrofit
 
 import com.jordyf15.githubuser.BuildConfig
 import okhttp3.OkHttpClient

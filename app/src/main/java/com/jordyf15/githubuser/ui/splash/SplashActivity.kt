@@ -1,11 +1,12 @@
-package com.jordyf15.githubuser
+package com.jordyf15.githubuser.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.jordyf15.githubuser.main.MainActivity
+import com.jordyf15.githubuser.R
+import com.jordyf15.githubuser.ui.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

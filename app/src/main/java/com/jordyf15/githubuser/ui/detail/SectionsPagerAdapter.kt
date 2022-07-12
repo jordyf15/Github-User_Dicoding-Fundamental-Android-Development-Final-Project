@@ -1,4 +1,4 @@
-package com.jordyf15.githubuser.detail
+package com.jordyf15.githubuser.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,18 +1,18 @@
-package com.jordyf15.githubuser.detail
+package com.jordyf15.githubuser.ui.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jordyf15.githubuser.api.User
-import com.jordyf15.githubuser.api.ApiConfig
+import com.jordyf15.githubuser.data.remote.response.User
+import com.jordyf15.githubuser.data.remote.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FollowingViewModel : ViewModel() {
-    private val _listFollowing = MutableLiveData<List<User>>()
-    val listFollowing: LiveData<List<User>> = _listFollowing
+class FollowerViewModel : ViewModel() {
+    private val _listFollower = MutableLiveData<List<User>>()
+    val listFollower: LiveData<List<User>> = _listFollower
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -20,9 +20,9 @@ class FollowingViewModel : ViewModel() {
     private val _errorMsg = MutableLiveData<String>()
     val errorMsg: LiveData<String> = _errorMsg
 
-    fun getFollowings(username: String) {
+    fun getFollowers(username: String) {
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getUserFollowing(username)
+        val client = ApiConfig.getApiService().getUserFollowers(username)
         client.enqueue(object : Callback<List<User>> {
             override fun onResponse(
                 call: Call<List<User>>,
@@ -30,22 +30,20 @@ class FollowingViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    _listFollowing.value = response.body()
+                    _listFollower.value = response.body()
                 } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
-                    _errorMsg.value = response.message()
+                    Log.e(TAG, "OnFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 _isLoading.value = false
-                Log.e(TAG, "onFailure: ${t.message.toString()}")
-                _errorMsg.value = t.message.toString()
+                Log.e(TAG, "OnFailure: ${t.message.toString()}")
             }
         })
     }
 
     companion object {
-        private const val TAG = "FollowingViewModel"
+        private const val TAG = "FollowerViewModel"
     }
 }

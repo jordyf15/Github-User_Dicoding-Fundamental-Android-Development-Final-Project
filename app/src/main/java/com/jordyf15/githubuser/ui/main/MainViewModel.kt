@@ -1,12 +1,12 @@
-package com.jordyf15.githubuser.main
+package com.jordyf15.githubuser.ui.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jordyf15.githubuser.api.Search
-import com.jordyf15.githubuser.api.User
-import com.jordyf15.githubuser.api.ApiConfig
+import com.jordyf15.githubuser.data.remote.response.Search
+import com.jordyf15.githubuser.data.remote.response.User
+import com.jordyf15.githubuser.data.remote.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

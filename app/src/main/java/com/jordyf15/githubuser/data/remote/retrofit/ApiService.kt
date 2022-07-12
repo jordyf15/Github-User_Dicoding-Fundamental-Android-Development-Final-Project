@@ -1,6 +1,9 @@
-package com.jordyf15.githubuser.api
+package com.jordyf15.githubuser.data.remote.retrofit
 
 import com.jordyf15.githubuser.BuildConfig
+import com.jordyf15.githubuser.data.remote.response.DetailUser
+import com.jordyf15.githubuser.data.remote.response.Search
+import com.jordyf15.githubuser.data.remote.response.User
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

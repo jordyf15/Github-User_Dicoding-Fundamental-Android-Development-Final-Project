@@ -1,4 +1,4 @@
-package com.jordyf15.githubuser.detail
+package com.jordyf15.githubuser.ui.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jordyf15.githubuser.api.User
+import com.jordyf15.githubuser.data.remote.response.User
 import com.jordyf15.githubuser.databinding.FragmentFollowingBinding
 
 class FollowingFragment : Fragment() {
