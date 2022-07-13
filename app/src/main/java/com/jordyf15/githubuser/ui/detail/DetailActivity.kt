@@ -6,14 +6,19 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jordyf15.githubuser.R
 import com.jordyf15.githubuser.databinding.ActivityDetailBinding
+import com.jordyf15.githubuser.utils.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-    private val detailViewModel by viewModels<DetailViewModel>()
+    private val viewModelFactory: ViewModelFactory = ViewModelFactory.getInstance(this)
+    private val detailViewModel by viewModels<DetailViewModel> {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +55,9 @@ class DetailActivity : AppCompatActivity() {
 
         }
         detailViewModel.errorMsg.observe(this) {
-            Toast.makeText(this, resources.getString(R.string.error_msg), Toast.LENGTH_SHORT).show()
+            if(!it.isNullOrEmpty()) {
+                Toast.makeText(this, resources.getString(R.string.error_msg, it), Toast.LENGTH_SHORT).show()
+            }
         }
         detailViewModel.isLoading.observe(this) {
             showLoading(it)

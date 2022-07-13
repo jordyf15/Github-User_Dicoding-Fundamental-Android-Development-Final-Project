@@ -9,4 +9,6 @@
     <color name="black_700">#161b22</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_200">#f85149</color>
+    <color name="red_400">#cf222e</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.jordyf15.githubuser.ui.detail
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,13 +9,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jordyf15.githubuser.R
 import com.jordyf15.githubuser.data.remote.response.User
 import com.jordyf15.githubuser.databinding.FragmentFollowingBinding
+import com.jordyf15.githubuser.utils.ViewModelFactory
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding
-    private val followingViewModel: FollowingViewModel by activityViewModels()
+    private lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var followingViewModel: FollowingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,13 +28,24 @@ class FollowingFragment : Fragment() {
         return binding?.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModelFactory = ViewModelFactory.getInstance(context)
+        val viewModel: FollowingViewModel by activityViewModels {
+            viewModelFactory
+        }
+        followingViewModel = viewModel
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         followingViewModel.listFollowing.observe(viewLifecycleOwner) {
             showRecyclerList(it)
         }
         followingViewModel.errorMsg.observe(viewLifecycleOwner) {
-            Toast.makeText(context, "An error has occurred", Toast.LENGTH_SHORT).show()
+            if(!it.isNullOrEmpty()) {
+                Toast.makeText(context, resources.getString(R.string.error_msg, it), Toast.LENGTH_SHORT).show()
+            }
         }
         followingViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)

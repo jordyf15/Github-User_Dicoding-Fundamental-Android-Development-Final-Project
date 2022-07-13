@@ -8,13 +8,18 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jordyf15.githubuser.R
 import com.jordyf15.githubuser.data.remote.response.User
 import com.jordyf15.githubuser.databinding.ActivityMainBinding
 import com.jordyf15.githubuser.ui.detail.DetailActivity
+import com.jordyf15.githubuser.utils.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel by viewModels<MainViewModel>()
+    private val viewModelFactory: ViewModelFactory = ViewModelFactory.getInstance(this)
+    private val mainViewModel by viewModels<MainViewModel> {
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainViewModel.errorMsg.observe(this) {
-            Toast.makeText(this, "An error has occurred", Toast.LENGTH_SHORT).show()
+            if(!it.isNullOrEmpty()) {
+                Toast.makeText(this, resources.getString(R.string.error_msg, it), Toast.LENGTH_SHORT).show()
+            }
         }
 
         mainViewModel.isLoading.observe(this) {
