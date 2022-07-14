@@ -9,6 +9,7 @@ class FollowingViewModel(private val usersRepository: UsersRepository) : ViewMod
     val listFollowing: LiveData<List<User>> = usersRepository.listFollowing
     val isLoading: LiveData<Boolean> = usersRepository.followingViewIsLoading
     val errorMsg: LiveData<String> = usersRepository.followingViewErrorMsg
+    val noDataMsg: LiveData<String> = usersRepository.followingViewNoData
 
     fun getFollowings(username: String) = usersRepository.getFollowings(username)
 }

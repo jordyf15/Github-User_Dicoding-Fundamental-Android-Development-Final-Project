@@ -44,11 +44,16 @@ class FollowingFragment : Fragment() {
         }
         followingViewModel.errorMsg.observe(viewLifecycleOwner) {
             if(!it.isNullOrEmpty()) {
-                Toast.makeText(context, resources.getString(R.string.error_msg, it), Toast.LENGTH_SHORT).show()
+                binding?.tvErrorMsg?.text = it
             }
         }
         followingViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
+        }
+        followingViewModel.noDataMsg.observe(viewLifecycleOwner) {
+            if(!it.isNullOrEmpty()) {
+                binding?.tvNoData?.text = it
+            }
         }
         val username = arguments?.getString(FOLLOWING_USERNAME) ?: ""
         followingViewModel.getFollowings(username)

@@ -56,7 +56,7 @@ class DetailActivity : AppCompatActivity() {
         }
         detailViewModel.errorMsg.observe(this) {
             if(!it.isNullOrEmpty()) {
-                Toast.makeText(this, resources.getString(R.string.error_msg, it), Toast.LENGTH_SHORT).show()
+                binding.tvErrorMsg.text = it
             }
         }
         detailViewModel.isLoading.observe(this) {

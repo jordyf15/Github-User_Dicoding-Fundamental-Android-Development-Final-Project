@@ -34,13 +34,20 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.errorMsg.observe(this) {
             if(!it.isNullOrEmpty()) {
-                Toast.makeText(this, resources.getString(R.string.error_msg, it), Toast.LENGTH_SHORT).show()
+                binding.tvErrorMsg.text = it
             }
         }
 
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+
+        mainViewModel.noDataMsg.observe(this) {
+            if(!it.isNullOrEmpty()){
+                binding.tvNoData.text = it
+            }
+        }
+
 
         binding.svUsers.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

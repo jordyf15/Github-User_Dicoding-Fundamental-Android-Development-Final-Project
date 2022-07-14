@@ -48,4 +48,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="No users found" />
 
+    <TextView
+        android:id="@+id/tv_error_msg"
+        style="@style/TextError"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="An error has occurred"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

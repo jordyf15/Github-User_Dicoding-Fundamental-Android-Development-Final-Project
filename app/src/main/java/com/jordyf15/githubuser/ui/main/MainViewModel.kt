@@ -16,6 +16,7 @@ class MainViewModel(private val usersRepository: UsersRepository) : ViewModel() 
     val listUsers: LiveData<List<User>> = usersRepository.listUsers
     val isLoading: LiveData<Boolean> = usersRepository.mainViewIsLoading
     val errorMsg: LiveData<String> = usersRepository.mainViewErrorMsg
+    val noDataMsg: LiveData<String> = usersRepository.mainViewNoData
 
     init {
         searchUsers("john")

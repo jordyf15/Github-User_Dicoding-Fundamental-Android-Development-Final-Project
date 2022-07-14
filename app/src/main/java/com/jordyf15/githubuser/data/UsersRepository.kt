@@ -33,6 +33,9 @@ class UsersRepository private constructor(
     val detailViewErrorMsg = MutableLiveData<String>()
     val followerViewErrorMsg = MutableLiveData<String>()
     val followingViewErrorMsg = MutableLiveData<String>()
+    val mainViewNoData = MutableLiveData<String>()
+    val followerViewNoData = MutableLiveData<String>()
+    val followingViewNoData = MutableLiveData<String>()
     var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -46,17 +49,28 @@ class UsersRepository private constructor(
             override fun onResponse(call: Call<Search>, response: Response<Search>) {
                 mainViewIsLoading.value = false
                 if (response.isSuccessful) {
+                    if (response.body()?.items?.isEmpty() == true) {
+                        mainViewNoData.value = "No users found"
+                    }
                     listUsers.value = response.body()?.items
                 } else {
-                    Log.e(TAG, "onFailure res: ${response.toString()}")
-                    mainViewErrorMsg.value = response.message()
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                    if (response.message().isEmpty()) {
+                        mainViewErrorMsg.value = "An error has occurred"
+                    } else {
+                        mainViewErrorMsg.value = response.message()
+                    }
                 }
             }
 
             override fun onFailure(call: Call<Search>, t: Throwable) {
                 mainViewIsLoading.value = false
-                Log.e(TAG, "onFailure fail: ${t.message.toString()}")
-                mainViewErrorMsg.value = t.message.toString()
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                if (t.message.toString().isEmpty()) {
+                    mainViewErrorMsg.value = "An error has occurred"
+                } else {
+                    mainViewErrorMsg.value = t.message.toString()
+                }
             }
         })
     }
@@ -73,15 +87,23 @@ class UsersRepository private constructor(
                 if (response.isSuccessful) {
                     userDetail.value = response.body()
                 } else {
-                    Log.e(TAG, "onFailure res: ${response.message()}")
-                    detailViewErrorMsg.value = response.message()
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                    if (response.message().isEmpty()) {
+                        detailViewErrorMsg.value = "An error has occurred"
+                    } else {
+                        detailViewErrorMsg.value = response.message()
+                    }
                 }
             }
 
             override fun onFailure(call: Call<DetailUser>, t: Throwable) {
                 detailViewIsLoading.value = false
-                Log.e(TAG, "onFailure fail: ${t.message.toString()}")
-                detailViewErrorMsg.value = t.message.toString()
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                if (t.message.toString().isEmpty()) {
+                    detailViewErrorMsg.value = "An error has occurred"
+                } else {
+                    detailViewErrorMsg.value = t.message.toString()
+                }
             }
         })
     }
@@ -96,17 +118,28 @@ class UsersRepository private constructor(
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 followerViewIsLoading.value = false
                 if (response.isSuccessful) {
+                    if (response.body()?.isEmpty() == true) {
+                        followerViewNoData.value = "No followers found"
+                    }
                     listFollower.value = response.body()
                 } else {
-                    Log.e(TAG, "onFailure res: ${response.message()}")
-                    followerViewErrorMsg.value = response.message()
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                    if (response.message().isEmpty()) {
+                        followerViewErrorMsg.value = "An error has occurred"
+                    } else {
+                        followerViewErrorMsg.value = response.message()
+                    }
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 followerViewIsLoading.value = false
-                Log.e(TAG, "onFailure fail: ${t.message.toString()}")
-                followerViewErrorMsg.value = t.message.toString()
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                if (t.message.toString().isEmpty()) {
+                    followerViewErrorMsg.value = "An error has occurred"
+                } else {
+                    followerViewErrorMsg.value = t.message.toString()
+                }
             }
 
         })
@@ -122,17 +155,28 @@ class UsersRepository private constructor(
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 followingViewIsLoading.value = false
                 if (response.isSuccessful) {
+                    if (response.body()?.isEmpty() == true) {
+                        followingViewNoData.value = "No followings found"
+                    }
                     listFollowing.value = response.body()
                 } else {
-                    Log.e(TAG, "onFailure res: ${response.message()}")
-                    followingViewErrorMsg.value = response.message()
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                    if (response.message().isEmpty()) {
+                        followingViewErrorMsg.value = "An error has occurred"
+                    } else {
+                        followingViewErrorMsg.value = response.message()
+                    }
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 followingViewIsLoading.value = false
-                Log.e(TAG, "onFailure fail: ${t.message.toString()}")
-                followingViewErrorMsg.value = t.message.toString()
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+                if (t.message.toString().isEmpty()) {
+                    followingViewErrorMsg.value = "An error has occurred"
+                } else {
+                    followingViewErrorMsg.value = t.message.toString()
+                }
             }
         })
     }

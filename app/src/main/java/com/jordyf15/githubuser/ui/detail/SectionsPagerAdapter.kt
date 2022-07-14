@@ -25,5 +25,4 @@ class SectionsPagerAdapter(activity: AppCompatActivity, private val username: St
         fragment?.arguments = bundle
         return fragment as Fragment
     }
-
 }
