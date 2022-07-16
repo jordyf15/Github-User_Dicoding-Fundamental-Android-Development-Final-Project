@@ -18,5 +18,4 @@ class UserDiffCallback(private val mOldUserList: List<UserEntity>, private val m
         val newUser = mNewUserList[newItemPosition]
         return oldUser.username == newUser.username && oldUser.avatarUrl == newUser.avatarUrl
     }
-
 }

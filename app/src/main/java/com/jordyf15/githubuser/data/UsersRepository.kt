@@ -182,7 +182,7 @@ class UsersRepository private constructor(
     }
 
     companion object {
-        private val TAG = "UsersRepository"
+        private const val TAG = "UsersRepository"
 
         @Volatile
         private var instance: UsersRepository? = null

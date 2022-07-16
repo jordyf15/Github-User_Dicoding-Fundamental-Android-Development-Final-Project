@@ -23,4 +23,7 @@
 
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
+    
+    <string name="setting">Setting</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

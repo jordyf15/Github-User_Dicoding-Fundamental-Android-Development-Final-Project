@@ -1,29 +1,49 @@
 package com.jordyf15.githubuser.ui.detail
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.StringRes
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.jordyf15.githubuser.R
+import com.jordyf15.githubuser.data.local.preference.SettingPreferences
 import com.jordyf15.githubuser.databinding.ActivityDetailBinding
-import com.jordyf15.githubuser.utils.ViewModelFactory
+import com.jordyf15.githubuser.ui.setting.SettingActivity
+import com.jordyf15.githubuser.utils.ActivityViewModelFactory
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
-    private val viewModelFactory: ViewModelFactory = ViewModelFactory.getInstance(this)
-    private val detailViewModel by viewModels<DetailViewModel> {
-        viewModelFactory
-    }
+    private lateinit var viewModelFactory: ActivityViewModelFactory
+    private lateinit var detailViewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        title = "Detail User"
+        val pref = SettingPreferences.getInstance(dataStore)
+
+        viewModelFactory = ActivityViewModelFactory.getInstance(this, pref)
+        detailViewModel = viewModelFactory.create(DetailViewModel::class.java)
+
+        detailViewModel.getThemeSettings().observe(this) {
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         detailViewModel.userDetail.observe(this) {
             binding.tvUsername.text = it.login
@@ -55,7 +75,7 @@ class DetailActivity : AppCompatActivity() {
 
         }
         detailViewModel.errorMsg.observe(this) {
-            if(!it.isNullOrEmpty()) {
+            if (!it.isNullOrEmpty()) {
                 binding.tvErrorMsg.text = it
             }
         }
@@ -65,6 +85,23 @@ class DetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra(EXTRA_USERNAME)
         if (username != null) {
             detailViewModel.getUserDetail(username)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.option_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> true
         }
     }
 
