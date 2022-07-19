@@ -7,11 +7,5 @@
             android:icon="@drawable/ic_setting"
             android:title="@string/setting"
             app:showAsAction="always" />
-
-        <item
-            android:id="@+id/favorite"
-            android:icon="@drawable/ic_favorite_menu"
-            android:title="@string/favorite"
-            app:showAsAction="always" />
     </group>
 </menu>

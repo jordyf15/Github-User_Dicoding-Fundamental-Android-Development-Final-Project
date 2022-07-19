@@ -1,6 +1,6 @@
 package com.jordyf15.githubuser.utils
 
-import android.content.Context
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jordyf15.githubuser.data.ThemeRepository
@@ -8,8 +8,7 @@ import com.jordyf15.githubuser.data.UsersRepository
 import com.jordyf15.githubuser.data.local.preference.SettingPreferences
 import com.jordyf15.githubuser.di.Injection
 import com.jordyf15.githubuser.ui.detail.DetailViewModel
-import com.jordyf15.githubuser.ui.detail.FollowerViewModel
-import com.jordyf15.githubuser.ui.detail.FollowingViewModel
+import com.jordyf15.githubuser.ui.favorite.FavoriteViewModel
 import com.jordyf15.githubuser.ui.main.MainViewModel
 import com.jordyf15.githubuser.ui.setting.SettingViewModel
 import com.jordyf15.githubuser.ui.splash.SplashViewModel
@@ -28,6 +27,8 @@ class ActivityViewModelFactory private constructor(
             return SettingViewModel(themeRepository) as T
         } else if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
             return SplashViewModel(themeRepository) as T
+        } else if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
+            return FavoriteViewModel(usersRepository, themeRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
@@ -35,10 +36,13 @@ class ActivityViewModelFactory private constructor(
     companion object {
         @Volatile
         private var instance: ActivityViewModelFactory? = null
-        fun getInstance(context: Context, pref: SettingPreferences): ActivityViewModelFactory =
+        fun getInstance(
+            application: Application,
+            pref: SettingPreferences
+        ): ActivityViewModelFactory =
             instance ?: synchronized(this) {
                 instance ?: ActivityViewModelFactory(
-                    Injection.provideUserRepository(context),
+                    Injection.provideUserRepository(application),
                     Injection.provideThemeRepository(pref)
                 )
             }.also { instance = it }

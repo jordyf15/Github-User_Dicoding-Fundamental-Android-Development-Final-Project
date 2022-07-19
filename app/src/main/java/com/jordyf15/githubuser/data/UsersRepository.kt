@@ -1,25 +1,25 @@
 package com.jordyf15.githubuser.data
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import com.jordyf15.githubuser.data.local.room.UsersDao
+import com.jordyf15.githubuser.data.local.entity.Favorite
+import com.jordyf15.githubuser.data.local.room.FavoriteDao
+import com.jordyf15.githubuser.data.local.room.FavoriteRoomDatabase
 import com.jordyf15.githubuser.data.remote.response.DetailUser
 import com.jordyf15.githubuser.data.remote.response.Search
 import com.jordyf15.githubuser.data.remote.response.User
-import com.jordyf15.githubuser.data.remote.retrofit.ApiConfig
 import com.jordyf15.githubuser.data.remote.retrofit.ApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class UsersRepository private constructor(
     private val apiService: ApiService,
-//    private val usersDao: UsersDao
+    application: Application
 ) {
     val listUsers = MutableLiveData<List<User>>()
     val userDetail = MutableLiveData<DetailUser>()
@@ -36,13 +36,33 @@ class UsersRepository private constructor(
     val mainViewNoData = MutableLiveData<String>()
     val followerViewNoData = MutableLiveData<String>()
     val followingViewNoData = MutableLiveData<String>()
-    var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    private val mFavoriteDao: FavoriteDao
+    private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+
+    init {
+        val db = FavoriteRoomDatabase.getDatabase(application)
+        mFavoriteDao = db.favoriteUserDao()
+    }
+
+    fun getAllFavorites(): LiveData<List<Favorite>> = mFavoriteDao.getAllFavorites()
+
+
+    fun insertFavorite(favorite: Favorite) =
+        executorService.execute { mFavoriteDao.insertFavorite(favorite) }
+
+    fun deleteFavorite(username: String) =
+        executorService.execute { mFavoriteDao.deleteFavorite(username) }
+
+
+    fun checkIsFavorite(username: String): LiveData<Boolean> =
+        mFavoriteDao.checkIsFavorite(username)
 
     fun searchUsers(username: String) {
         mainViewIsLoading.value = true
         listUsers.value = emptyList()
         mainViewErrorMsg.value = ""
+        mainViewNoData.value = ""
 
         val client = apiService.searchUsers(username)
         client.enqueue(object : Callback<Search> {
@@ -112,6 +132,7 @@ class UsersRepository private constructor(
         followerViewIsLoading.value = true
         listFollower.value = emptyList()
         followerViewErrorMsg.value = ""
+        followerViewNoData.value = ""
 
         val client = apiService.getUserFollowers(username)
         client.enqueue(object : Callback<List<User>> {
@@ -149,6 +170,7 @@ class UsersRepository private constructor(
         followingViewIsLoading.value = true
         listFollowing.value = emptyList()
         followingViewErrorMsg.value = ""
+        followingViewNoData.value = ""
 
         val client = apiService.getUserFollowing(username)
         client.enqueue(object : Callback<List<User>> {
@@ -188,10 +210,10 @@ class UsersRepository private constructor(
         private var instance: UsersRepository? = null
         fun getInstance(
             apiService: ApiService,
-//            usersDao: UsersDao
+            application: Application
         ): UsersRepository =
             instance ?: synchronized(this) {
-                instance ?: UsersRepository(apiService)
+                instance ?: UsersRepository(apiService, application)
             }.also { instance = it }
     }
 }

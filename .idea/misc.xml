@@ -7,6 +7,10 @@
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.124" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_company.xml" value="0.149" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_dark_mode.xml" value="0.129" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_detail.xml" value="0.124" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_dot.xml" value="0.1555" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_favorite.xml" value="0.1555" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_favorite_menu.xml" value="0.1555" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_launcher_background.xml" value="0.124" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_location.xml" value="0.129" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/ic_people.xml" value="0.129" />
@@ -16,6 +20,7 @@
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/splash_brand_logo_day.xml" value="0.2305" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/drawable/splash_brand_logo_night.xml" value="0.2305" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/activity_detail.xml" value="0.264" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/activity_favorite.xml" value="0.17089755213055305" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/activity_splash.xml" value="0.20863616930312098" />
@@ -23,7 +28,9 @@
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/fragment_following.xml" value="0.20863616930312098" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/item_row_follow.xml" value="0.20863616930312098" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/layout/item_row_user.xml" value="0.264" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/menu/favorite_option_menu.xml" value="0.19184430027803523" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/menu/option_menu.xml" value="0.20863616930312098" />
+        <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/menu/setting_option_menu.xml" value="0.20863616930312098" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.124" />
         <entry key="..\:/kuliah/android-dev/GitHubUser/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.124" />
       </map>

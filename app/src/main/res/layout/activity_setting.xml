@@ -24,8 +24,8 @@
                 android:layout_marginStart="8dp"
                 android:drawablePadding="10dp"
                 android:text="@string/dark_mode"
-                android:textSize="18sp"
                 android:textColor="?attr/colorOnSecondary"
+                android:textSize="18sp"
                 app:drawableStartCompat="@drawable/ic_dark_mode"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,5 +41,4 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

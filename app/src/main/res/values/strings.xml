@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">GitHub User</string>
+    <string name="detail_title">Detail User</string>
+    <string name="favorite_title">Favorite User</string>
 
     <string name="user_name">Jordy Ferdian</string>
     <string name="user_username">Jordyf15</string>
@@ -23,7 +25,10 @@
 
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
-    
+
     <string name="setting">Setting</string>
     <string name="dark_mode">Dark Mode</string>
+
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
 </resources>

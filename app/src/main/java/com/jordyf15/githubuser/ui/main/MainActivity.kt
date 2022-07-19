@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.datastore.core.DataStore
@@ -21,8 +18,10 @@ import com.jordyf15.githubuser.data.local.preference.SettingPreferences
 import com.jordyf15.githubuser.data.remote.response.User
 import com.jordyf15.githubuser.databinding.ActivityMainBinding
 import com.jordyf15.githubuser.ui.detail.DetailActivity
+import com.jordyf15.githubuser.ui.favorite.FavoriteActivity
 import com.jordyf15.githubuser.ui.setting.SettingActivity
 import com.jordyf15.githubuser.utils.ActivityViewModelFactory
+
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val pref = SettingPreferences.getInstance(dataStore)
-        viewModelFactory = ActivityViewModelFactory.getInstance(this, pref)
+        viewModelFactory = ActivityViewModelFactory.getInstance(application, pref)
         mainViewModel = viewModelFactory.create(MainViewModel::class.java)
 
         binding.rvUsers.setHasFixedSize(true)
@@ -45,9 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainViewModel.errorMsg.observe(this) {
-            if (!it.isNullOrEmpty()) {
-                binding.tvErrorMsg.text = it
-            }
+            binding.tvErrorMsg.text = it
         }
 
         mainViewModel.isLoading.observe(this) {
@@ -55,17 +52,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainViewModel.noDataMsg.observe(this) {
-            if (!it.isNullOrEmpty()) {
-                binding.tvNoData.text = it
-            }
+            binding.tvNoData.text = it
         }
 
-        mainViewModel.getThemeSettings().observe(this){
-            if (it) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        mainViewModel.getThemeSettings().observe(this) {
+            setTheme(it)
         }
 
         binding.svUsers.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -77,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?) = false
         })
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -90,6 +80,11 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.setting -> {
                 val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.favorite -> {
+                val intent = Intent(this, FavoriteActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -113,6 +108,14 @@ class MainActivity : AppCompatActivity() {
                 showUserDetail(username)
             }
         })
+    }
+
+    private fun setTheme(isDarkMode: Boolean) {
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

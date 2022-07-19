@@ -23,26 +23,29 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val pref = SettingPreferences.getInstance(dataStore)
-        viewModelFactory = ActivityViewModelFactory.getInstance(this, pref)
+        viewModelFactory = ActivityViewModelFactory.getInstance(application, pref)
         splashViewModel = viewModelFactory.create(SplashViewModel::class.java)
 
         splashViewModel.getThemeSettings().observe(this) {
-            if (it) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+            setTheme(it)
         }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
 
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, splashDuration)
+    }
+
+    private fun setTheme(isDarkMode: Boolean) {
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     companion object {

@@ -1,6 +1,5 @@
 package com.jordyf15.githubuser.ui.setting
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jordyf15.githubuser.data.ThemeRepository

@@ -1,5 +1,6 @@
 package com.jordyf15.githubuser.ui.detail
 
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,7 +21,8 @@ class FollowerFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModelFactory = FragmentViewModelFactory.getInstance(context)
+        viewModelFactory =
+            FragmentViewModelFactory.getInstance(context.applicationContext as Application)
         val viewModel: FollowerViewModel by activityViewModels {
             viewModelFactory
         }
@@ -41,17 +43,13 @@ class FollowerFragment : Fragment() {
             showRecyclerList(it)
         }
         followerViewModel.errorMsg.observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                binding?.tvErrorMsg?.text = it
-            }
+            binding?.tvErrorMsg?.text = it
         }
         followerViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
         followerViewModel.noDataMsg.observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                binding?.tvNoData?.text = it
-            }
+            binding?.tvNoData?.text = it
         }
         val username = arguments?.getString(FOLLOWER_USERNAME) ?: ""
         if (username.isNotEmpty()) {

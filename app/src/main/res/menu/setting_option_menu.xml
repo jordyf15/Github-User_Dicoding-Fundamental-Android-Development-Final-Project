@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:menuCategory="container">
         <item
-            android:id="@+id/setting"
-            android:icon="@drawable/ic_setting"
-            android:title="@string/setting"
-            app:showAsAction="always" />
-
-        <item
             android:id="@+id/favorite"
             android:icon="@drawable/ic_favorite_menu"
             android:title="@string/favorite"

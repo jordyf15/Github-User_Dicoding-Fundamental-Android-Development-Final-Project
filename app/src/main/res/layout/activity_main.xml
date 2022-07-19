@@ -55,5 +55,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="An error has occurred"/>
+        tools:text="An error has occurred" />
 </androidx.constraintlayout.widget.ConstraintLayout>
